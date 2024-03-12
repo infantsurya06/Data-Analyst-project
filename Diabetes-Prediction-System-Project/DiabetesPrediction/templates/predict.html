@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict - DBP</title>
+    {% comment %} <link rel="stylesheet", href="{% static 'DiabetesPrediction/style.css' %}"> {% endcomment %}
+    <style>
+    html {
+        background: #e3e3ff;
+    }
+
+    .body-content {
+        padding-top: 6vh;
+    }
+
+    .container {
+        width: 400px;
+        height: 525px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        border: 2px solid rgba(255, 255, 255, 0.049);
+        border-radius: 15px;
+        background: #8787c5;
+        box-shadow: 0 0 25px #6c6cc9 ;
+    }
+
+    h2 {
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-item {
+        margin: 5px;
+        padding-bottom: 10px;
+        display: flex;
+    }
+
+    .form-item input {
+        width: 150px;
+        height: 30px;
+        border: 2px solid #e1dede69;
+        border-radius: 5px;
+        background: white;
+        color: black;
+        text-align: left;
+        margin: 0 5px;
+    }
+
+    .form-item-email {
+        margin: 0 5px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-item-email input {
+        height: 30px;
+        border: 2px solid #e1dede69;
+        border-radius: 5px;
+        background: white;
+        color: black;
+        text-align: left;
+        margin: 0 5px;
+    }
+
+    .form-item-password {
+        margin: 5px;
+        padding-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-item-password input {
+        height: 28px;
+        border: 2px solid #e1dede69;
+        border-radius: 5px;
+        background: white;
+        color: black;
+        text-align: left;
+        margin: 5px 5px;
+    }
+
+    .remember-box {
+        margin: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: white;
+        display: flex;
+    }
+
+    .remember-box a {
+        text-decoration: none;
+        color: white;
+        margin-left: 30px;
+    }
+
+    .remember-box a:hover {
+        color: grey;
+    }
+
+    .form-btns {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        padding: 10px 0;
+    }
+
+    .form-btns button {
+        margin: auto;
+        font-size: 20px;
+        padding: 5px 15px;
+        border: 0;
+        border-radius: 15px;
+        color: rgb(75, 61, 61);
+        background: #fbba50;
+        width: 280px;
+        cursor: pointer;
+    }
+
+    .form-btns button:disabled {
+        background: #8f8b85 !important;
+        color: rgb(131, 120, 120) !important;
+        cursor: not-allowed;
+    }
+
+    .form-btns button:hover {
+        background: #d88a0c;
+        color: antiquewhite;
+    }
+
+    .options {
+        padding-top: 15px;
+        margin: auto;
+        color: white;
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .options a {
+        font-size: 13px;
+        color: white;
+    }
+
+    .options a:hover {
+        color: rgb(167, 165, 165);
+    }
+
+    p {
+        text-align: center;
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="body-content">
+        <div class="container">
+            <h2>Diabetes Checking System</h2>
+            <div class="login-form">
+                <form action="result">
+                    <div class="form-item-password">
+                        <input type="text" name="pregnancies" id="pregnancies" placeholder="Pregnancies" autocomplete="off">
+                        <input type="text" name="glucose" id="glucose" placeholder="Glucose" required autocomplete="off">
+                        <input type="text" name="blood-pressure" id="blood-pressure" placeholder="Blood Pressure" required autocomplete="off">
+                        <input type="text" name="age" id="age" placeholder="Age" required autocomplete="off">
+                        <input type="text" name="skin-thikness" id="skin-thikness" placeholder="Skinthikness" required autocomplete="off">
+                        <input type="text" name="insulin" id="insulin" placeholder="Insulin" required autocomplete="off">
+                        <input type="text" name="bmi" id="bmi" placeholder="BMI" required autocomplete="off">
+                        <input type="text" name="diabetes-pedigree" id="diabetes-pedigree" placeholder="Diabetes Predigree" required autocomplete="off">                        
+                    </div>
+                    <div class="form-btns">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+                {% if msg %}
+                    <script>
+                        if (performance.navigation.type !== 1) {
+                            alert('{{msg}}');
+                        }
+                        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+                            .then(() => {
+                                window.location.reload();
+                            })
+                            .catch((error) => console.error("Error!", error.message));
+                    </script>
+                {% endif %}
+                <p>Copyright &copy; 2024 Mit Kalariya</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
